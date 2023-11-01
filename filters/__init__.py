@@ -1,1 +1,1 @@
-from .filters import custom_filter_3
+from .filter_IsAdmin import IsAdmin

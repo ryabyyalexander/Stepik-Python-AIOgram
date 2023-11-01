@@ -5,3 +5,7 @@ load_dotenv()
 
 TOKEN = str(os.getenv('TOKEN'))
 admin = int(os.getenv('admin'))
+
+
+
+admin_ids: list[int] = [admin]
