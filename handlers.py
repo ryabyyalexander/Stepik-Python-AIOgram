@@ -1,6 +1,6 @@
 from aiogram.types import Message
-
 from data import dp
+from filters import custom_filter_3
 
 
 async def send_echo(message: Message):
@@ -12,4 +12,4 @@ async def send_echo(message: Message):
                  'методом send_copy'
         )
 
-dp.message.register(send_echo)
+dp.message.register(send_echo, custom_filter_3)
