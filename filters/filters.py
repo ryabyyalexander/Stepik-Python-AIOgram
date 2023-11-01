@@ -1,6 +1,5 @@
 from aiogram.types import Message
 
-
 def custom_filter_1(message: Message) -> bool:
     return message.text == 'filter'
 
