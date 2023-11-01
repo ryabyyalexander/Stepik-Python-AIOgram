@@ -1,20 +1,5 @@
-from aiogram import Bot, Dispatcher
-from aiogram.types import Message
-from data import TOKEN
-
-bot = Bot(token=TOKEN, parse_mode='HTML')
-dp = Dispatcher()
-
-
-async def send_echo(message: Message):
-    try:
-        await message.send_copy(chat_id=message.chat.id)
-    except TypeError:
-        await message.reply(
-            text='Данный тип апдейтов не поддерживается '
-                 'методом send_copy'
-        )
-
+from data import dp, bot
+from handlers import send_echo
 
 dp.message.register(send_echo)
 
