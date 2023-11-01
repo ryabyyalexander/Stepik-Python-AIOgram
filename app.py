@@ -1,7 +1,4 @@
-from data import dp, bot
-from handlers import send_echo
-
-dp.message.register(send_echo)
-
 if __name__ == "__main__":
+    from data import bot
+    from handlers import dp
     dp.run_polling(bot)

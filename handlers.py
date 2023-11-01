@@ -1,5 +1,7 @@
 from aiogram.types import Message
 
+from data import dp
+
 
 async def send_echo(message: Message):
     try:
@@ -9,3 +11,5 @@ async def send_echo(message: Message):
             text='Данный тип апдейтов не поддерживается '
                  'методом send_copy'
         )
+
+dp.message.register(send_echo)
