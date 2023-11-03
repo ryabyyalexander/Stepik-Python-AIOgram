@@ -9,4 +9,4 @@ TOKEN = env('TOKEN')
 admin = int(env('admin'))
 
 
-admin_ids = [admin]
+admin_ids: list[int] = [admin]
