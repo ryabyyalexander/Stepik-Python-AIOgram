@@ -1,11 +1,12 @@
-import os
-from dotenv import load_dotenv
-
-load_dotenv()
-
-TOKEN = str(os.getenv('TOKEN'))
-admin = int(os.getenv('admin'))
+from environs import Env
 
 
+env = Env()
+env.read_env()
 
-admin_ids: list[int] = [admin]
+
+TOKEN = env('TOKEN')
+admin = env('admin')
+
+
+admin_ids = [admin]

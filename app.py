@@ -1,9 +1,10 @@
 if __name__ == "__main__":
     from data import bot
     from data import dp
-    from handlers import photo_register, register_start
+    from handlers import user_blocked_bot, photo, echo
 
-    photo_register(dp)
-    register_start(dp)
+    photo(dp)
+    user_blocked_bot(dp)
+    echo(dp)
 
     dp.run_polling(bot)

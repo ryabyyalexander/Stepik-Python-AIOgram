@@ -1,5 +1,4 @@
-from aiogram.filters import ChatMemberUpdatedFilter, KICKED
-from aiogram.types import Message, ChatMemberUpdated
+from aiogram.types import Message
 from aiogram import Dispatcher
 
 from data import admin_ids
@@ -16,10 +15,5 @@ async def send_echo(message: Message):
         )
 
 
-async def process_user_blocked_bot(event: ChatMemberUpdated):
-    print(f'Пользователь {event.from_user.id} заблокировал бота')
-
-
-def register_start(dp: Dispatcher):
-    dp.my_chat_member.register(process_user_blocked_bot, ChatMemberUpdatedFilter(member_status_changed=KICKED))
+def echo(dp: Dispatcher):
     dp.message.register(send_echo, IsAdmin(admin_ids))

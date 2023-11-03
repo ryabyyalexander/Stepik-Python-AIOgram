@@ -3,7 +3,7 @@ from aiogram.types import Message
 
 
 class IsAdmin(BaseFilter):
-    def __init__(self, admin_ids: list[int]) -> None:
+    def __init__(self, admin_ids: list):
         self.admin_ids = admin_ids
 
     async def __call__(self, message: Message) -> bool:
