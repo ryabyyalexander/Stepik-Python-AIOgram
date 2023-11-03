@@ -1,12 +1,18 @@
+from dataclasses import dataclass
 from environs import Env
 
 
-env = Env()
-env.read_env()
+@dataclass
+class TgBot:
+    token: str            # Токен для доступа к телеграм-боту
 
 
-TOKEN = env('TOKEN')
-admin = int(env('admin'))
+@dataclass
+class Config:
+    tg_bot: TgBot
 
 
-admin_ids: list[int] = [admin]
+def load_config(path: str | None = None) -> Config:
+    env = Env()
+    env.read_env(path)
+    return Config(tg_bot=TgBot(token=env('BOT_TOKEN')))
