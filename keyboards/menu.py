@@ -4,7 +4,7 @@ from aiogram.types import BotCommand
 
 async def set_main_menu(bot: bot):
     main_menu_commands = [
-        BotCommand(command='/help',
+        BotCommand(command='a',
                    description='Справка по работе бота')
     ]
 
