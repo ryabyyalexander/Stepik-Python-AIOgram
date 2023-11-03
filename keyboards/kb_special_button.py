@@ -26,7 +26,9 @@ poll_btn = KeyboardButton(
 builder.row(contact_btn, geo_btn, poll_btn, width=1)
 builder.row(*keyboard, width=8)
 
-keyboard: ReplyKeyboardMarkup = builder.as_markup(
+builder.adjust(2, 1, 8)
+
+special_button: ReplyKeyboardMarkup = builder.as_markup(
     resize_keyboard=True,
     one_time_keyboard=True,
     input_field_placeholder='Нажмите кнопку'
