@@ -3,7 +3,7 @@ from aiogram.utils.keyboard import ReplyKeyboardBuilder
 
 # Создаем список списков с кнопками
 keyboard: list[KeyboardButton] = [
-    KeyboardButton(text=str(i)) for i in range(1, 17)]
+    KeyboardButton(text=str(i)) for i in range(1,9)]
 
 # Инициализируем билдер
 builder = ReplyKeyboardBuilder()
@@ -24,13 +24,10 @@ poll_btn = KeyboardButton(
 
 # Добавляем кнопки в билдер
 builder.row(contact_btn, geo_btn, poll_btn, width=1)
-
-# Создаем объект клавиатуры
-
-
 builder.row(*keyboard, width=8)
 
 keyboard: ReplyKeyboardMarkup = builder.as_markup(
     resize_keyboard=True,
-    one_time_keyboard=True
+    one_time_keyboard=True,
+    input_field_placeholder='Нажмите кнопку'
 )
