@@ -26,11 +26,13 @@ async def main():
     dp.include_router(router=close_bot_menu.router)
     dp.include_router(router=is_admin.router)
     dp.include_router(router=user_block_bot.router)
-    dp.include_router(router=photo.router)
-    # dp.include_router(router=echo.router)
 
     dp.include_router(user_handlers.router)
-    dp.include_router(other_handlers.router)
+
+    dp.include_router(router=photo.router)
+    dp.include_router(router=echo.router)
+
+
 
     await bot.delete_webhook(drop_pending_updates=True)
     await dp.start_polling(bot)
