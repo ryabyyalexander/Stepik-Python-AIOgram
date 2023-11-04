@@ -1,7 +1,6 @@
 import asyncio
 import logging
 
-
 # Инициализируем логгер
 logger = logging.getLogger(__name__)
 
@@ -10,7 +9,7 @@ logger = logging.getLogger(__name__)
 async def main():
     from data import dp
     from data import bot
-    from routers import is_admin, echo, user_block_bot, photo, close_bot_menu, user_handlers, other_handlers
+    from handlers import is_admin, echo, user_block_bot, photo, close_bot_menu, user_handlers
     from keyboards import set_main_menu_book
 
     logging.basicConfig(
@@ -31,8 +30,6 @@ async def main():
 
     dp.include_router(router=photo.router)
     dp.include_router(router=echo.router)
-
-
 
     await bot.delete_webhook(drop_pending_updates=True)
     await dp.start_polling(bot)

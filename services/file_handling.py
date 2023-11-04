@@ -2,7 +2,7 @@ import os
 import sys
 
 BOOK_PATH = 'book/Bredberi_Marsianskie-hroniki.txt'
-PAGE_SIZE = 1050
+PAGE_SIZE = 800
 
 book: dict[int, str] = {}
 
