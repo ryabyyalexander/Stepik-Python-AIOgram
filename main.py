@@ -17,17 +17,13 @@ async def main():
         format='%(filename)s:%(lineno)d #%(levelname)-8s '
                '[%(asctime)s] - %(name)s - %(message)s')
 
-    # Выводим в консоль информацию о начале запуска бота
     logger.info('Starting bot')
-
     dp.startup.register(set_main_menu_book)
 
     dp.include_router(router=close_bot_menu.router)
     dp.include_router(router=is_admin.router)
     dp.include_router(router=user_block_bot.router)
-
-    dp.include_router(user_handlers.router)
-
+    dp.include_router(router=user_handlers.router)
     dp.include_router(router=photo.router)
     dp.include_router(router=echo.router)
 
