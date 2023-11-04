@@ -22,6 +22,7 @@ async def process_start_command(message: Message):
     await message.answer(LEXICON[message.text])
     if message.from_user.id not in users_db:
         users_db[message.from_user.id] = deepcopy(user_dict_template)
+    await message.delete()
 
 
 # Этот хэндлер будет срабатывать на команду "/help"
@@ -29,6 +30,7 @@ async def process_start_command(message: Message):
 @router.message(Command(commands='help'))
 async def process_help_command(message: Message):
     await message.answer(LEXICON[message.text])
+    await message.delete()
 
 
 # Этот хэндлер будет срабатывать на команду "/beginning"
@@ -44,6 +46,8 @@ async def process_beginning_command(message: Message):
                     f'{users_db[message.from_user.id]["page"]}/{len(book)}',
                     'forward'))
 
+    await message.delete()
+
 
 # Этот хэндлер будет срабатывать на команду "/continue"
 # и отправлять пользователю страницу книги, на которой пользователь
@@ -58,6 +62,8 @@ async def process_continue_command(message: Message):
                     f'{users_db[message.from_user.id]["page"]}/{len(book)}',
                     'forward'))
 
+    await message.delete()
+
 
 # Этот хэндлер будет срабатывать на команду "/bookmarks"
 # и отправлять пользователю список сохраненных закладок,
@@ -71,6 +77,8 @@ async def process_bookmarks_command(message: Message):
                 *users_db[message.from_user.id]["bookmarks"]))
     else:
         await message.answer(text=LEXICON['no_bookmarks'])
+
+    await message.delete()
 
 
 # Этот хэндлер будет срабатывать на нажатие инлайн-кнопки "вперед"

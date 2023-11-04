@@ -1,15 +1,15 @@
 import os
 import sys
 
-BOOK_PATH = 'book/Bredberi_Marsianskie-hroniki.txt'
-PAGE_SIZE = 800
+BOOK_PATH = 'book/Bible.txt'
+PAGE_SIZE = 801
 
 book: dict[int, str] = {}
 
 
 # Функция, возвращающая строку с текстом страницы и ее размер
 def _get_part_text(text: str, start: int, size: int) -> tuple[str, int]:
-    end_signs = ',.!:;?'
+    end_signs = ',.!:;?]'
     counter = 0
     if len(text) < start + size:
         size = len(text) - start
