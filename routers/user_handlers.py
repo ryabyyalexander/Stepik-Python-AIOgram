@@ -8,7 +8,7 @@ from filters.filters import IsDelBookmarkCallbackData, IsDigitCallbackData
 from keyboards.bookmarks_kb import (create_bookmarks_keyboard,
                                     create_edit_keyboard)
 from keyboards.pagination_kb import create_pagination_keyboard
-from lexicon.lexicon import LEXICON
+from data import LEXICON
 from services.file_handling import book
 
 router = Router()
