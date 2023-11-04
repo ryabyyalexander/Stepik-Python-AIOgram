@@ -1,7 +1,7 @@
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 
-from data import lexicon
+from data import LEXICON
 
 # Функция для генерации инлайн-клавиатур "на лету"
 def create_inline_kb(width: int,
@@ -17,7 +17,7 @@ def create_inline_kb(width: int,
     if args:
         for button in args:
             buttons.append(InlineKeyboardButton(
-                text=lexicon[button] if button in lexicon else button,
+                text=LEXICON[button] if button in LEXICON else button,
                 callback_data=button))
     if kwargs:
         for button, text in kwargs.items():

@@ -10,7 +10,7 @@ async def main():
     from data import dp
     from data import bot
     from routers import is_admin, echo, user_block_bot, photo, close_bot_menu
-    from keyboards import set_main_menu
+    from keyboards import set_main_menu_book
 
     logging.basicConfig(
         level=logging.INFO,
@@ -20,7 +20,7 @@ async def main():
     # Выводим в консоль информацию о начале запуска бота
     logger.info('Starting bot')
 
-    dp.startup.register(set_main_menu)
+    dp.startup.register(set_main_menu_book)
 
     dp.include_router(router=close_bot_menu.router)
     dp.include_router(router=is_admin.router)

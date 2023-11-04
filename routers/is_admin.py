@@ -8,7 +8,7 @@ from keyboards import create_inline_kb
 router = Router()
 
 
-@router.message(F.text == '/admin', IsAdmin)
+@router.message(F.text == '*', IsAdmin)
 async def func(message: Message):
     keyboard = create_inline_kb(4, last_btn='Последняя кнопка', **BUTTONS)
     await message.answer('is admin', reply_markup=keyboard)

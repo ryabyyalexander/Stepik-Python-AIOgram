@@ -1,2 +1,2 @@
 from .loader import bot, dp
-from .lexicon import lexicon, BUTTONS
+from .lexicon import LEXICON, BUTTONS, MENU_BOOK_COMMANDS
