@@ -1,9 +1,6 @@
 from aiogram.types import KeyboardButton, ReplyKeyboardMarkup, KeyboardButtonPollType
 from aiogram.utils.keyboard import ReplyKeyboardBuilder
 
-from data.lexicon import city25
-print(city25)
-c25 = [KeyboardButton(text=i) for i in city25]
 
 # Инициализируем билдер
 builder = ReplyKeyboardBuilder()
@@ -14,18 +11,16 @@ contact_btn = KeyboardButton(
     request_contact=True
 )
 geo_btn = KeyboardButton(
-    text='Отправить геолокацию',
+    text='Отправить гео',
     request_location=True
 )
 poll_btn = KeyboardButton(
-    text='Создать опрос/викторину',
+    text='Создать опрос',
     request_poll=KeyboardButtonPollType()
 )
 
-# Добавляем кнопки в билдер
-builder.row(*c25)
 builder.row(contact_btn, geo_btn, poll_btn)
-builder.adjust(2,2,3)
+builder.adjust(3)
 
 special_button: ReplyKeyboardMarkup = builder.as_markup(
     resize_keyboard=True,
