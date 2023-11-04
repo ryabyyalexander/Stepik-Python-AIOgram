@@ -1,14 +1,24 @@
 import asyncio
+import logging
+
+# Инициализируем логгер
+logger = logging.getLogger(__name__)
 
 
-
-
-
+# Функция конфигурирования и запуска бота
 async def main():
     from data import dp
     from data import bot
     from routers import is_admin, echo, user_block_bot, photo, close_bot_menu
     from keyboards import set_main_menu
+
+    logging.basicConfig(
+        level=logging.INFO,
+        format='%(filename)s:%(lineno)d #%(levelname)-8s '
+               '[%(asctime)s] - %(name)s - %(message)s')
+
+    # Выводим в консоль информацию о начале запуска бота
+    logger.info('Starting bot')
 
     dp.startup.register(set_main_menu)
 
@@ -23,5 +33,4 @@ async def main():
 
 
 if __name__ == "__main__":
-
     asyncio.run(main())
