@@ -1,22 +1,27 @@
 from aiogram import Router
-from aiogram.enums import ContentType
 from aiogram.types import Message
 from aiogram import F
 
 router = Router()
-photo: list[str] = []
-video: list[str] = []
+
+photos: list[str] = []
+videos: list[str] = []
+audios: list[str] = []
+voices: list[str] = []
+documents: list[str] = []
+stickers: list[str] = []
 
 
-@router.message(F.content_type.in_({ContentType.PHOTO,
-                                    ContentType.VIDEO,
-                                    ContentType.AUDIO,
-                                    ContentType.VOICE,
-                                    ContentType.DOCUMENT,
-                                    ContentType.STICKER}))
-async def get_media(message: Message):
-    await message.delete()
-    photo.append(message.photo[0].file_id)
-    await message.answer_photo(photo[-1], caption=message.content_type)
-
-
+@router.message(F.photo | F.video | F.sticker | F.document | F.voice | F.audio)
+async def set_media(message: Message):
+    ct = message.content_type
+    if ct == 'photo':
+        photos.append(message.photo[-1].file_id)
+    elif ct == 'sticker':
+        stickers.append(message.sticker.file_id)
+    elif ct == 'document':
+        documents.append(message.document.file_id)
+    elif ct == 'voice':
+        voices.append(message.voice.file_id)
+    elif ct == 'audio':
+        audios.append(message.audio.file_id)
