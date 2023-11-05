@@ -35,6 +35,7 @@ async def process_start_command(message: Message):
     await message.delete()
 
 
+
 # Этот хэндлер будет срабатывать на нажатие кнопки "Хочу еще!" и
 # отправлять в чат новое сообщение, не удаляя старое
 @router.callback_query(F.data == 'more')

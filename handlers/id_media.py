@@ -17,7 +17,6 @@ async def set_media(message: Message):
     ct = message.content_type
     if ct == 'photo':
         photos.append(message.photo[-1].file_id)
-        print(photos[-1])
     elif ct == 'sticker':
         stickers.append(message.sticker.file_id)
     elif ct == 'document':
@@ -26,3 +25,6 @@ async def set_media(message: Message):
         voices.append(message.voice.file_id)
     elif ct == 'audio':
         audios.append(message.audio.file_id)
+    elif ct == 'video':
+        videos.append(message.video.file_id)
+    await message.delete()
