@@ -1,30 +1,19 @@
 import asyncio
-import logging
-
-# Инициализируем логгер
-logger = logging.getLogger(__name__)
 
 
 # Функция конфигурирования и запуска бота
 async def main():
-    from data import dp
-    from data import bot
-    from handlers import is_admin, echo, user_block_bot, photo, close_bot_menu, user_handlers
+    from data import dp, bot, on_startup
+    from handlers import is_admin, echo, user_block_bot, media, close_bot_menu
     from keyboards import set_main_menu_book
 
-    logging.basicConfig(
-        level=logging.INFO,
-        format='%(filename)s:%(lineno)d #%(levelname)-8s '
-               '[%(asctime)s] - %(name)s - %(message)s')
-
-    logger.info('Starting bot')
     dp.startup.register(set_main_menu_book)
+    dp.startup.register(on_startup)
 
     dp.include_router(router=close_bot_menu.router)
     dp.include_router(router=is_admin.router)
     dp.include_router(router=user_block_bot.router)
-    dp.include_router(router=user_handlers.router)
-    dp.include_router(router=photo.router)
+    dp.include_router(router=media.router)
     dp.include_router(router=echo.router)
 
     await bot.delete_webhook(drop_pending_updates=True)
