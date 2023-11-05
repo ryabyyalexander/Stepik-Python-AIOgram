@@ -27,4 +27,5 @@ async def set_media(message: Message):
         audios.append(message.audio.file_id)
     elif ct == 'video':
         videos.append(message.video.file_id)
+        print(videos)
     await message.delete()
