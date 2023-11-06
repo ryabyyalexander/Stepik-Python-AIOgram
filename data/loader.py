@@ -15,8 +15,7 @@ logging.basicConfig(
 
 logger.info('Starting bot')
 
-def on_startup():
-    print('bot starting')
+
 
 config: Config = load_config()
 bot = Bot(token=config.tg_bot.token, parse_mode='HTML')
