@@ -1,6 +1,6 @@
 import asyncio
 
-from handlers import id_media, slide_media
+from handlers import id_media, slide_media, book
 
 
 # Функция конфигурирования и запуска бота
@@ -10,6 +10,7 @@ async def main():
     from keyboards import set_main_menu_book
 
     dp.startup.register(set_main_menu_book)
+    dp.include_router(router=book.router)
 
     dp.include_router(router=close_bot_menu.router)
     dp.include_router(router=is_admin.router)

@@ -10,7 +10,7 @@ from states.fsm_form import FSMFillForm
 router = Router()
 # Этот хэндлер будет срабатывать на команду /start вне состояний
 # и предлагать перейти к заполнению анкеты, отправив команду /fillform
-@router.message(CommandStart(), StateFilter(default_state))
+@router.message(Command(commands='fsm'), StateFilter(default_state))
 async def process_start_command(message: Message):
     await message.answer(text='Этот бот демонстрирует работу FSM\n\n'
                               'Чтобы перейти к заполнению анкеты - '

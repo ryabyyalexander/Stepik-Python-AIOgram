@@ -8,9 +8,7 @@ LEXICON: dict[str, str] = {
     'but_7': 'Кнопка 7',
     'forward': '>>',
     'backward': '<<',
-    '/start': '<b>Привет, читатель!</b>\n\nЭто бот, в котором '
-              'ты можешь почитать Библию\n\nЧтобы посмотреть список доступных '
-              'команд - набери /help',
+    '/start': '<b>Привет!</b>',
     '/help': '<b>Это бот-читалка</b>\n\nДоступные команды:\n\n/beginning - '
              'перейти в начало книги\n/continue - продолжить '
              'чтение\n/bookmarks - посмотреть список закладок\n/help - '
@@ -29,10 +27,17 @@ LEXICON: dict[str, str] = {
 }
 
 MENU_BOOK_COMMANDS: dict[str, str] = {
-    '/start': 'В начало книги',
-    '/video': 'Продолжить чтение',
-    '/animation': 'Мои закладки',
-    '/cancel': 'Справка по работе бота'
+    '/start': 'start',
+    '/admin': 'is admin',
+    '/video': 'video',
+    '/animation': 'Gif',
+    '/photo': 'photo',
+    '/audio': 'audio',
+    '/document': 'document',
+    '/beginning': 'book',
+    '/fsm': 'FSM',
+    '/cancel': 'cancel',
+    '/close_bot_menu': 'close_bot_menu'
 }
 
 BUTTONS: dict[str, str] = {
