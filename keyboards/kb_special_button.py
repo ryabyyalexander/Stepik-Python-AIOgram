@@ -20,7 +20,7 @@ poll_btn = KeyboardButton(
 )
 
 builder.row(contact_btn, geo_btn, poll_btn)
-builder.adjust(3)
+builder.adjust(1, 1, 1)
 
 special_button: ReplyKeyboardMarkup = builder.as_markup(
     resize_keyboard=True,

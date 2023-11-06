@@ -27,17 +27,17 @@ LEXICON: dict[str, str] = {
 }
 
 MENU_BOOK_COMMANDS: dict[str, str] = {
-    '/start': 'start',
-    '/admin': 'is admin',
-    '/video': 'video',
-    '/animation': 'Gif',
-    '/photo': 'photo',
-    '/audio': 'audio',
-    '/document': 'document',
-    '/beginning': 'book',
-    '/fsm': 'FSM',
-    '/cancel': 'cancel',
-    '/close_bot_menu': 'close_bot_menu'
+    '/start': 'перезапуск бота',
+    '/admin': 'проверка на админа, клавиатура',
+    '/video': 'пример слайда видео',
+    '/animation': 'пример слайда анимации',
+    '/photo': 'пример слайда photo',
+    '/audio': 'пример слайда audio',
+    '/document': 'пример слайда document',
+    '/beginning': 'пример книги',
+    '/fsm': 'машина состояний, форма',
+    '/cancel': 'сброс машині состояний',
+    '/close_bot_menu': 'удаление кнопки меню бота'
 }
 
 BUTTONS: dict[str, str] = {
