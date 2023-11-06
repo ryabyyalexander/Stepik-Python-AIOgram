@@ -29,10 +29,10 @@ LEXICON: dict[str, str] = {
 }
 
 MENU_BOOK_COMMANDS: dict[str, str] = {
-    '/beginning': 'В начало книги',
-    '/continue': 'Продолжить чтение',
-    '/bookmarks': 'Мои закладки',
-    '/help': 'Справка по работе бота'
+    '/start': 'В начало книги',
+    '/video': 'Продолжить чтение',
+    '/animation': 'Мои закладки',
+    '/cancel': 'Справка по работе бота'
 }
 
 BUTTONS: dict[str, str] = {

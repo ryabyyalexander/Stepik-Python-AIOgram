@@ -20,7 +20,7 @@ g1 = 'CgACAgIAAxkBAAIcRGVIB3yfF8fmuX0R56VVHgkE3DqHAAI3NAACf8XRSbuAV4YGegc2MwQ'
 g2 = 'CgACAgIAAxkBAAIcRWVIB4MXhwj8KA8D4TOQlP3U_bNoAAJHMQACRWX5SpLiGvQ9pzK7MwQ'
 
 # Этот хэндлер будет срабатывать на команду "/start"
-@router.message(F.text == 'vv')
+@router.message(F.text == '/video')
 async def process_sl(message: Message):
     markup = create_inline_kb(2, 'video')
     await message.answer_video(video=v1,
@@ -49,7 +49,7 @@ async def process_button_press(callback: CallbackQuery, bot: bot):
                 caption='Это video 1'),
             reply_markup=markup)
 
-@router.message(F.text == 'ff')
+@router.message(F.text == '/photo')
 async def process_sl(message: Message):
     markup = create_inline_kb(2, 'photo')
     await message.answer_photo(photo=ph1,
@@ -79,7 +79,7 @@ async def process_button_press(callback: CallbackQuery, bot: bot):
             reply_markup=markup)
 
 
-@router.message(F.text == 'aa')
+@router.message(F.text == '/audio')
 async def process_sl(message: Message):
     markup = create_inline_kb(2, 'audio')
     await message.answer_audio(audio=a1,
@@ -108,7 +108,7 @@ async def process_button_press(callback: CallbackQuery, bot: bot):
                 caption='Это audio 1'),
             reply_markup=markup)
 
-@router.message(F.text == 'gg')
+@router.message(F.text == '/animation')
 async def process_sl(message: Message):
     markup = create_inline_kb(2, 'animation')
     await message.answer_animation(animation=g1,
@@ -137,7 +137,7 @@ async def process_button_press(callback: CallbackQuery, bot: bot):
                 caption='Это animation 1'),
             reply_markup=markup)
 
-@router.message(F.text == 'dd')
+@router.message(F.text == '/document')
 async def process_sl(message: Message):
     markup = create_inline_kb(2, 'document')
     await message.answer_document(document=d1,

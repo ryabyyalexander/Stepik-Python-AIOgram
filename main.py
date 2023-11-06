@@ -1,10 +1,12 @@
 import asyncio
 
+from handlers import id_media, slide_media
+
 
 # Функция конфигурирования и запуска бота
 async def main():
     from data import dp, bot
-    from handlers import is_admin, echo, user_block_bot, close_bot_menu
+    from handlers import is_admin, fsm_form, user_block_bot, close_bot_menu
     from keyboards import set_main_menu_book
 
     dp.startup.register(set_main_menu_book)
@@ -12,7 +14,9 @@ async def main():
     dp.include_router(router=close_bot_menu.router)
     dp.include_router(router=is_admin.router)
     dp.include_router(router=user_block_bot.router)
-    dp.include_router(router=echo.router)
+    dp.include_router(router=fsm_form.router)
+    dp.include_router(router=id_media.router)
+    dp.include_router(router=slide_media.router)
 
     await bot.delete_webhook(drop_pending_updates=True)
     await dp.start_polling(bot)
