@@ -1,0 +1,14 @@
+[Unit]
+Description=stepik
+After=syslog.target
+After=network.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/root/city25club
+ExecStart=/root/city25club/venv/bin/python3 /root/city25club/main.py
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
