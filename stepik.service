@@ -7,7 +7,7 @@ After=network.target
 Type=simple
 User=root
 WorkingDirectory=/root/city25club
-ExecStart=/root/city25club/venv/bin/python3 /root/city25club/main.py
+ExecStart=/root/your_dir/venv/bin/python3 /root/you_dir/main.py
 Restart=always
 
 [Install]
