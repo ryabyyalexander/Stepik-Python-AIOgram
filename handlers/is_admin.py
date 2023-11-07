@@ -1,9 +1,8 @@
 from aiogram import Router, F
 from aiogram.types import Message
 
-from data import BUTTONS
 from filters import IsAdmin
-from keyboards import create_inline_kb, special_button
+from keyboards import special_button
 
 router = Router()
 

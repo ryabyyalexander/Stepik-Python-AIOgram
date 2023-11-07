@@ -3,11 +3,12 @@ from aiogram.utils.keyboard import InlineKeyboardBuilder
 
 from data import LEXICON
 
+
 # Функция для генерации инлайн-клавиатур "на лету"
-def create_inline_kb(width: int,
-                     *args: str,
-                     last_btn: str | None = None,
-                     **kwargs: str) -> InlineKeyboardMarkup:
+def ikb(width: int,
+        *args: str,
+        last_btn: str | None = None,
+        **kwargs: str) -> InlineKeyboardMarkup:
     # Инициализируем билдер
     kb_builder = InlineKeyboardBuilder()
     # Инициализируем список для кнопок

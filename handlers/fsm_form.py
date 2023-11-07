@@ -1,5 +1,5 @@
 from aiogram import Router, F
-from aiogram.filters import CommandStart, StateFilter, Command
+from aiogram.filters import StateFilter, Command
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import default_state
 from aiogram.types import Message, InlineKeyboardButton, InlineKeyboardMarkup, CallbackQuery, PhotoSize
@@ -8,6 +8,8 @@ from data.database import user_dict
 from states.fsm_form import FSMFillForm
 
 router = Router()
+
+
 # Этот хэндлер будет срабатывать на команду /start вне состояний
 # и предлагать перейти к заполнению анкеты, отправив команду /fillform
 @router.message(Command(commands='fsm'), StateFilter(default_state))
@@ -70,7 +72,7 @@ async def warning_not_name(message: Message):
 # Этот хэндлер будет срабатывать, если введен корректный возраст
 # и переводить в состояние выбора пола
 @router.message(StateFilter(FSMFillForm.fill_age),
-            lambda x: x.text.isdigit() and 4 <= int(x.text) <= 120)
+                lambda x: x.text.isdigit() and 4 <= int(x.text) <= 120)
 async def process_age_sent(message: Message, state: FSMContext):
     # Cохраняем возраст в хранилище по ключу "age"
     await state.update_data(age=message.text)
@@ -106,7 +108,7 @@ async def warning_not_age(message: Message):
 # Этот хэндлер будет срабатывать на нажатие кнопки при
 # выборе пола и переводить в состояние отправки фото
 @router.callback_query(StateFilter(FSMFillForm.fill_gender),
-                   F.data.in_(['male', 'female', 'undefined_gender']))
+                       F.data.in_(['male', 'female', 'undefined_gender']))
 async def process_gender_press(callback: CallbackQuery, state: FSMContext):
     # Cохраняем пол (callback.data нажатой кнопки) в хранилище,
     # по ключу "gender"
@@ -132,7 +134,7 @@ async def warning_not_gender(message: Message):
 # Этот хэндлер будет срабатывать, если отправлено фото
 # и переводить в состояние выбора образования
 @router.message(StateFilter(FSMFillForm.upload_photo),
-            F.photo[-1].as_('largest_photo'))
+                F.photo[-1].as_('largest_photo'))
 async def process_photo_sent(message: Message,
                              state: FSMContext,
                              largest_photo: PhotoSize):
@@ -149,8 +151,8 @@ async def process_photo_sent(message: Message,
                                          callback_data='no_edu')
     # Добавляем кнопки в клавиатуру (две в одном ряду и одну в другом)
     keyboard: list[list[InlineKeyboardButton]] = [
-                        [secondary_button, higher_button],
-                        [no_edu_button]]
+        [secondary_button, higher_button],
+        [no_edu_button]]
     # Создаем объект инлайн-клавиатуры
     markup = InlineKeyboardMarkup(inline_keyboard=keyboard)
     # Отправляем пользователю сообщение с клавиатурой
@@ -172,7 +174,7 @@ async def warning_not_photo(message: Message):
 # Этот хэндлер будет срабатывать, если выбрано образование
 # и переводить в состояние согласия получать новости
 @router.callback_query(StateFilter(FSMFillForm.fill_education),
-                   F.data.in_(['secondary', 'higher', 'no_edu']))
+                       F.data.in_(['secondary', 'higher', 'no_edu']))
 async def process_education_press(callback: CallbackQuery, state: FSMContext):
     # Cохраняем данные об образовании по ключу "education"
     await state.update_data(education=callback.data)
@@ -183,8 +185,8 @@ async def process_education_press(callback: CallbackQuery, state: FSMContext):
                                           callback_data='no_news')
     # Добавляем кнопки в клавиатуру в один ряд
     keyboard: list[list[InlineKeyboardButton]] = [
-                                    [yes_news_button,
-                                     no_news_button]]
+        [yes_news_button,
+         no_news_button]]
     # Создаем объект инлайн-клавиатуры
     markup = InlineKeyboardMarkup(inline_keyboard=keyboard)
     # Редактируем предыдущее сообщение с кнопками, отправляя
@@ -210,7 +212,7 @@ async def warning_not_education(message: Message):
 # Этот хэндлер будет срабатывать на выбор получать или
 # не получать новости и выводить из машины состояний
 @router.callback_query(StateFilter(FSMFillForm.fill_wish_news),
-                   F.data.in_(['yes_news', 'no_news']))
+                       F.data.in_(['yes_news', 'no_news']))
 async def process_wish_news_press(callback: CallbackQuery, state: FSMContext):
     # Cохраняем данные о получении новостей по ключу "wish_news"
     await state.update_data(wish_news=callback.data == 'yes_news')
@@ -254,4 +256,3 @@ async def process_showdata_command(message: Message):
         await message.answer(text='Вы еще не заполняли анкету. '
                                   'Чтобы приступить - отправьте '
                                   'команду /fillform')
-

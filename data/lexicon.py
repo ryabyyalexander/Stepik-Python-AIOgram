@@ -26,7 +26,7 @@ LEXICON: dict[str, str] = {
     'cancel_text': '/continue - продолжить чтение'
 }
 
-MENU_BOOK_COMMANDS: dict[str, str] = {
+MENU_COMMANDS: dict[str, str] = {
     '/start': 'перезапуск бота',
     '/admin': 'проверка на админа, клавиатура',
     '/video': 'пример слайда видео',
@@ -52,5 +52,3 @@ BUTTONS: dict[str, str] = {
     'btn_9': '9',
     'btn_10': '10',
     'btn_11': '11'}
-
-

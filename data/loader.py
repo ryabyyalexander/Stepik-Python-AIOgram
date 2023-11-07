@@ -7,7 +7,7 @@ from aiogram.fsm.storage.memory import MemoryStorage
 from .config import Config, load_config
 
 storage = MemoryStorage()
-# Инициализируем логгер
+
 logger = logging.getLogger(__name__)
 
 logging.basicConfig(
@@ -17,11 +17,10 @@ logging.basicConfig(
 
 logger.info('Starting bot')
 
-
-
 config: Config = load_config()
 bot = Bot(token=config.tg_bot.token, parse_mode='HTML')
 dp = Dispatcher(storage=storage)
+
 
 async def on_startup(_):
     pass

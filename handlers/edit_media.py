@@ -1,10 +1,9 @@
-from aiogram import Router, F
+from aiogram import Router, F, Bot
 from aiogram.types import (CallbackQuery, InputMediaAudio,
                            InputMediaAnimation, InputMediaDocument, InputMediaPhoto,
                            InputMediaVideo, Message)
 from aiogram.exceptions import TelegramBadRequest
 
-from data import bot
 from keyboards import create_inline_kb
 
 router = Router()
@@ -19,6 +18,7 @@ ph2 = 'AgACAgIAAxkBAAIcK2VH_wpN3q2j6ylFbjReNCmLYrmbAAKV0zEb_4hBSspkZIYseXqIAQADA
 g1 = 'CgACAgIAAxkBAAIcRGVIB3yfF8fmuX0R56VVHgkE3DqHAAI3NAACf8XRSbuAV4YGegc2MwQ'
 g2 = 'CgACAgIAAxkBAAIcRWVIB4MXhwj8KA8D4TOQlP3U_bNoAAJHMQACRWX5SpLiGvQ9pzK7MwQ'
 
+
 # Этот хэндлер будет срабатывать на команду "/start"
 @router.message(F.text == '/video')
 async def process_sl(message: Message):
@@ -30,7 +30,7 @@ async def process_sl(message: Message):
 
 # Этот хэндлер будет срабатывать на нажатие инлайн-кнопки
 @router.callback_query(F.data.in_(['video']))
-async def process_button_press(callback: CallbackQuery, bot: bot):
+async def process_button_press(callback: CallbackQuery, bot: Bot):
     markup = create_inline_kb(2, 'video')
     try:
         await bot.edit_message_media(
@@ -49,6 +49,7 @@ async def process_button_press(callback: CallbackQuery, bot: bot):
                 caption='Это video 1'),
             reply_markup=markup)
 
+
 @router.message(F.text == '/photo')
 async def process_sl(message: Message):
     markup = create_inline_kb(2, 'photo')
@@ -59,7 +60,7 @@ async def process_sl(message: Message):
 
 # Этот хэндлер будет срабатывать на нажатие инлайн-кнопки
 @router.callback_query(F.data.in_(['photo']))
-async def process_button_press(callback: CallbackQuery, bot: bot):
+async def process_button_press(callback: CallbackQuery, bot: Bot):
     markup = create_inline_kb(2, 'photo')
     try:
         await bot.edit_message_media(
@@ -89,7 +90,7 @@ async def process_sl(message: Message):
 
 # Этот хэндлер будет срабатывать на нажатие инлайн-кнопки
 @router.callback_query(F.data.in_(['audio']))
-async def process_button_press(callback: CallbackQuery, bot: bot):
+async def process_button_press(callback: CallbackQuery, bot: Bot):
     markup = create_inline_kb(2, 'audio')
     try:
         await bot.edit_message_media(
@@ -108,17 +109,18 @@ async def process_button_press(callback: CallbackQuery, bot: bot):
                 caption='Это audio 1'),
             reply_markup=markup)
 
+
 @router.message(F.text == '/animation')
 async def process_sl(message: Message):
     markup = create_inline_kb(2, 'animation')
     await message.answer_animation(animation=g1,
-                               caption='Это animation 1',
-                               reply_markup=markup)
+                                   caption='Это animation 1',
+                                   reply_markup=markup)
 
 
 # Этот хэндлер будет срабатывать на нажатие инлайн-кнопки
 @router.callback_query(F.data.in_(['animation']))
-async def process_button_press(callback: CallbackQuery, bot: bot):
+async def process_button_press(callback: CallbackQuery, bot: Bot):
     markup = create_inline_kb(2, 'animation')
     try:
         await bot.edit_message_media(
@@ -137,17 +139,18 @@ async def process_button_press(callback: CallbackQuery, bot: bot):
                 caption='Это animation 1'),
             reply_markup=markup)
 
+
 @router.message(F.text == '/document')
 async def process_sl(message: Message):
     markup = create_inline_kb(2, 'document')
     await message.answer_document(document=d1,
-                               caption='Это document 1',
-                               reply_markup=markup)
+                                  caption='Это document 1',
+                                  reply_markup=markup)
 
 
 # Этот хэндлер будет срабатывать на нажатие инлайн-кнопки
 @router.callback_query(F.data.in_(['document']))
-async def process_button_press(callback: CallbackQuery, bot: bot):
+async def process_button_press(callback: CallbackQuery, bot: Bot):
     markup = create_inline_kb(2, 'document')
     try:
         await bot.edit_message_media(
