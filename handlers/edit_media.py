@@ -4,7 +4,7 @@ from aiogram.types import (CallbackQuery, InputMediaAudio,
                            InputMediaVideo, Message)
 from aiogram.exceptions import TelegramBadRequest
 
-from keyboards import create_inline_kb
+from keyboards import ikb
 
 router = Router()
 v1 = 'BAACAgIAAxkBAAIcGmVHiZq-AreHSC6VmtUR8NNiVmzYAAJpNAAC_4hBSn0eQv-9BjlFMwQ'
@@ -22,7 +22,7 @@ g2 = 'CgACAgIAAxkBAAIcRWVIB4MXhwj8KA8D4TOQlP3U_bNoAAJHMQACRWX5SpLiGvQ9pzK7MwQ'
 # Этот хэндлер будет срабатывать на команду "/start"
 @router.message(F.text == '/video')
 async def process_sl(message: Message):
-    markup = create_inline_kb(2, 'video')
+    markup = ikb(2, 'video')
     await message.answer_video(video=v1,
                                caption='Это video 1',
                                reply_markup=markup)
@@ -31,7 +31,7 @@ async def process_sl(message: Message):
 # Этот хэндлер будет срабатывать на нажатие инлайн-кнопки
 @router.callback_query(F.data.in_(['video']))
 async def process_button_press(callback: CallbackQuery, bot: Bot):
-    markup = create_inline_kb(2, 'video')
+    markup = ikb(2, 'video')
     try:
         await bot.edit_message_media(
             chat_id=callback.message.chat.id,
@@ -52,7 +52,7 @@ async def process_button_press(callback: CallbackQuery, bot: Bot):
 
 @router.message(F.text == '/photo')
 async def process_sl(message: Message):
-    markup = create_inline_kb(2, 'photo')
+    markup = ikb(2, 'photo')
     await message.answer_photo(photo=ph1,
                                caption='Это photo 1',
                                reply_markup=markup)
@@ -61,7 +61,7 @@ async def process_sl(message: Message):
 # Этот хэндлер будет срабатывать на нажатие инлайн-кнопки
 @router.callback_query(F.data.in_(['photo']))
 async def process_button_press(callback: CallbackQuery, bot: Bot):
-    markup = create_inline_kb(2, 'photo')
+    markup = ikb(2, 'photo')
     try:
         await bot.edit_message_media(
             chat_id=callback.message.chat.id,
@@ -82,7 +82,7 @@ async def process_button_press(callback: CallbackQuery, bot: Bot):
 
 @router.message(F.text == '/audio')
 async def process_sl(message: Message):
-    markup = create_inline_kb(2, 'audio')
+    markup = ikb(2, 'audio')
     await message.answer_audio(audio=a1,
                                caption='Это audio 1',
                                reply_markup=markup)
@@ -91,7 +91,7 @@ async def process_sl(message: Message):
 # Этот хэндлер будет срабатывать на нажатие инлайн-кнопки
 @router.callback_query(F.data.in_(['audio']))
 async def process_button_press(callback: CallbackQuery, bot: Bot):
-    markup = create_inline_kb(2, 'audio')
+    markup = ikb(2, 'audio')
     try:
         await bot.edit_message_media(
             chat_id=callback.message.chat.id,
@@ -112,7 +112,7 @@ async def process_button_press(callback: CallbackQuery, bot: Bot):
 
 @router.message(F.text == '/animation')
 async def process_sl(message: Message):
-    markup = create_inline_kb(2, 'animation')
+    markup = ikb(2, 'animation')
     await message.answer_animation(animation=g1,
                                    caption='Это animation 1',
                                    reply_markup=markup)
@@ -121,7 +121,7 @@ async def process_sl(message: Message):
 # Этот хэндлер будет срабатывать на нажатие инлайн-кнопки
 @router.callback_query(F.data.in_(['animation']))
 async def process_button_press(callback: CallbackQuery, bot: Bot):
-    markup = create_inline_kb(2, 'animation')
+    markup = ikb(2, 'animation')
     try:
         await bot.edit_message_media(
             chat_id=callback.message.chat.id,
@@ -142,7 +142,7 @@ async def process_button_press(callback: CallbackQuery, bot: Bot):
 
 @router.message(F.text == '/document')
 async def process_sl(message: Message):
-    markup = create_inline_kb(2, 'document')
+    markup = ikb(2, 'document')
     await message.answer_document(document=d1,
                                   caption='Это document 1',
                                   reply_markup=markup)
@@ -151,7 +151,7 @@ async def process_sl(message: Message):
 # Этот хэндлер будет срабатывать на нажатие инлайн-кнопки
 @router.callback_query(F.data.in_(['document']))
 async def process_button_press(callback: CallbackQuery, bot: Bot):
-    markup = create_inline_kb(2, 'document')
+    markup = ikb(2, 'document')
     try:
         await bot.edit_message_media(
             chat_id=callback.message.chat.id,
