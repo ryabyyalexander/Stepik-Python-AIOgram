@@ -9,34 +9,17 @@ from keyboards.bookmarks_kb import (create_bookmarks_keyboard,
                                     create_edit_keyboard)
 from keyboards.pagination_kb import create_pagination_keyboard
 from data import LEXICON
-from services.file_handling import book
+from services import book
 
 router = Router()
-
-
-# Этот хэндлер будет срабатывать на команду "/start" -
-# добавлять пользователя в базу данных, если его там еще не было
-# и отправлять ему приветственное сообщение
-@router.message(CommandStart())
-async def process_start_command(message: Message):
-    await message.answer(LEXICON[message.text])
-    if message.from_user.id not in users_db:
-        users_db[message.from_user.id] = deepcopy(user_dict_template)
-    await message.delete()
-
-
-# Этот хэндлер будет срабатывать на команду "/help"
-# и отправлять пользователю сообщение со списком доступных команд в боте
-@router.message(Command(commands='help'))
-async def process_help_command(message: Message):
-    await message.answer(LEXICON[message.text])
-    await message.delete()
 
 
 # Этот хэндлер будет срабатывать на команду "/beginning"
 # и отправлять пользователю первую страницу книги с кнопками пагинации
 @router.message(Command(commands='beginning'))
 async def process_beginning_command(message: Message):
+    if message.from_user.id not in users_db:
+        users_db[message.from_user.id] = deepcopy(user_dict_template)
     users_db[message.from_user.id]['page'] = 1
     text = book[users_db[message.from_user.id]['page']]
     await message.answer(

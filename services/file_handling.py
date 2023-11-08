@@ -2,7 +2,7 @@ import os
 import sys
 
 BOOK_PATH = 'book/Bible.txt'
-PAGE_SIZE = 801
+PAGE_SIZE = 800
 
 book: dict[int, str] = {}
 
