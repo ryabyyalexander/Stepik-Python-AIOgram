@@ -1,6 +1,6 @@
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from aiogram.utils.keyboard import InlineKeyboardBuilder
-from data import LEXICON
+from data import BOOK
 
 
 # Функция, генерирующая клавиатуру для страницы книги
@@ -9,7 +9,7 @@ def create_pagination_keyboard(*buttons: str) -> InlineKeyboardMarkup:
     kb_builder = InlineKeyboardBuilder()
     # Добавляем в билдер ряд с кнопками
     kb_builder.row(*[InlineKeyboardButton(
-        text=LEXICON[button] if button in LEXICON else button,
+        text=BOOK[button] if button in BOOK else button,
         callback_data=button) for button in buttons])
     # Возвращаем объект инлайн-клавиатуры
     return kb_builder.as_markup()

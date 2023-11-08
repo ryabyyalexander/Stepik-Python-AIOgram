@@ -8,7 +8,7 @@ from filters.filters import IsDelBookmarkCallbackData, IsDigitCallbackData
 from keyboards.bookmarks_kb import (create_bookmarks_keyboard,
                                     create_edit_keyboard)
 from keyboards.pagination_kb import create_pagination_keyboard
-from data import LEXICON
+from data import BOOK
 from services import book
 
 router = Router()
@@ -55,11 +55,11 @@ async def process_continue_command(message: Message):
 async def process_bookmarks_command(message: Message):
     if users_db[message.from_user.id]["bookmarks"]:
         await message.answer(
-            text=LEXICON[message.text],
+            text=BOOK[message.text],
             reply_markup=create_bookmarks_keyboard(
                 *users_db[message.from_user.id]["bookmarks"]))
     else:
-        await message.answer(text=LEXICON['no_bookmarks'])
+        await message.answer(text=BOOK['no_bookmarks'])
 
     await message.delete()
 
@@ -125,7 +125,7 @@ async def process_bookmark_press(callback: CallbackQuery):
 @router.callback_query(F.data == 'edit_bookmarks')
 async def process_edit_press(callback: CallbackQuery):
     await callback.message.edit_text(
-                text=LEXICON[callback.data],
+                text=BOOK[callback.data],
                 reply_markup=create_edit_keyboard(
                                 *users_db[callback.from_user.id]["bookmarks"]))
     await callback.answer()
@@ -135,7 +135,7 @@ async def process_edit_press(callback: CallbackQuery):
 # "отменить" во время работы со списком закладок (просмотр и редактирование)
 @router.callback_query(F.data == 'cancel')
 async def process_cancel_press(callback: CallbackQuery):
-    await callback.message.edit_text(text=LEXICON['cancel_text'])
+    await callback.message.edit_text(text=BOOK['cancel_text'])
     await callback.answer()
 
 
@@ -147,9 +147,9 @@ async def process_del_bookmark_press(callback: CallbackQuery):
                                                     int(callback.data[:-3]))
     if users_db[callback.from_user.id]['bookmarks']:
         await callback.message.edit_text(
-                    text=LEXICON['/bookmarks'],
+                    text=BOOK['/bookmarks'],
                     reply_markup=create_edit_keyboard(
                             *users_db[callback.from_user.id]["bookmarks"]))
     else:
-        await callback.message.edit_text(text=LEXICON['no_bookmarks'])
+        await callback.message.edit_text(text=BOOK['no_bookmarks'])
     await callback.answer()

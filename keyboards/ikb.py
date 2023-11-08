@@ -1,7 +1,7 @@
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 
-from data import LEXICON
+from data import BOOK
 
 
 # Функция для генерации инлайн-клавиатур "на лету"
@@ -18,7 +18,7 @@ def ikb(width: int,
     if args:
         for button in args:
             buttons.append(InlineKeyboardButton(
-                text=LEXICON[button] if button in LEXICON else button,
+                text=BOOK[button] if button in BOOK else button,
                 callback_data=button))
     if kwargs:
         for button, text in kwargs.items():

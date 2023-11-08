@@ -2,7 +2,7 @@ from aiogram.filters import Command, CommandStart
 from aiogram.types import Message
 from aiogram import Router
 
-from data import LEXICON
+from data import BOOK
 
 router = Router()
 
@@ -12,7 +12,7 @@ router = Router()
 # и отправлять ему приветственное сообщение
 @router.message(CommandStart())
 async def process_start_command(message: Message):
-    await message.answer(LEXICON[message.text])
+    await message.answer(BOOK[message.text])
     # if message.from_user.id not in users_db:
     #     users_db[message.from_user.id] = deepcopy(user_dict_template)
     await message.delete()
@@ -22,7 +22,7 @@ async def process_start_command(message: Message):
 # и отправлять пользователю сообщение со списком доступных команд в боте
 @router.message(Command(commands='help'))
 async def process_help_command(message: Message):
-    await message.answer(LEXICON[message.text])
+    await message.answer(BOOK[message.text])
     await message.delete()
 
 

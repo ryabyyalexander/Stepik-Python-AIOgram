@@ -1,3 +1,3 @@
 from .loader import bot, dp
-from .lexicon import LEXICON, BUTTONS, MENU_COMMANDS
+from .lexicon import BOOK, BUTTONS, MENU_COMMANDS
 from .config import admin
