@@ -17,9 +17,11 @@ def load_config(path: str | None = None) -> Config:
     env.read_env(path)
     return Config(tg_bot=TgBot(token=env('BOT_TOKEN')))
 
+
 def get_admin():
     env = Env()
     env.read_env()
     return env('ADMIN_IDS')
+
 
 admin = get_admin()

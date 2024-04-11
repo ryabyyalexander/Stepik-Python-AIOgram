@@ -23,6 +23,7 @@ g2 = 'CgACAgIAAxkBAAIcRWVIB4MXhwj8KA8D4TOQlP3U_bNoAAJHMQACRWX5SpLiGvQ9pzK7MwQ'
 @router.message(F.text == '/video')
 async def process_sl(message: Message):
     markup = ikb(2, 'video')
+    print(f'video: {v1}')
     await message.answer_video(video=v1,
                                caption='Это video 1',
                                reply_markup=markup)
