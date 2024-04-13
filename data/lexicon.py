@@ -20,17 +20,10 @@ BOOK: dict[str, str] = {
 }
 
 MENU_COMMANDS: dict[str, str] = {
-    '/admin': 'проверка на админа, ikb клавиатура',
-    '/beginning': 'пример книги',
-    '/bookmarks': 'закладки',
     '/fsm': 'машина состояний, форма',
     '/cancel': 'сброс машині состояний',
-    '/video': 'пример слайда видео',
-    '/animation': 'пример слайда анимации',
-    '/photo': 'пример слайда photo',
-    '/audio': 'пример слайда audio',
-    '/document': 'пример слайда document',
-    '/close_bot_menu': 'удаление кнопки меню бота'
+    '/photo': 'слайд фото',
+    '/video': 'слайд видео'
 }
 
 BUTTONS: dict[str, str] = {
@@ -45,3 +38,8 @@ BUTTONS: dict[str, str] = {
     'btn_9': '9',
     'btn_10': '10',
     'btn_11': '11'}
+
+PIC: dict[str, str] = {
+    'mileston_blue': 'AgACAgIAAxkBAAIBSmYaHM-R6rJAeYQUO58xLA0gxN9yAAKt1zEbuwXQSLqengtT9h3EAQADAgADeAADNAQ',
+    'mileston_green': 'AgACAgIAAxkBAAIBS2YaKXqQbcSrlnWMkCstQy93d-a8AAIS3TEbEyXQSDGtdvC_Hf7SAQADAgADeAADNAQ'
+    }

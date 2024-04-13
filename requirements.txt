@@ -25,3 +25,5 @@ pytz==2023.3.post1
 typing_extensions==4.7.1
 virtualenv==20.24.6
 yarl==1.9.2
+
+requests~=2.31.0
