@@ -38,3 +38,4 @@ async def set_media(message: Message):
         animations.append(message.animation.file_id)
         print(*animations)
     await message.delete()
+

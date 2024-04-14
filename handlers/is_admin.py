@@ -10,6 +10,6 @@ router = Router()
 
 @router.message(F.text == '/admin', IsAdmin)
 async def func(message: Message):
-    keyboard = ikb(4, last_btn='Последняя кнопка', **BUTTONS)
+    keyboard = ikb(4, **BUTTONS)
     await message.answer('is admin', reply_markup=keyboard)
     await message.delete()

@@ -4,83 +4,111 @@ from aiogram.types import (CallbackQuery, InputMediaAudio,
                            InputMediaVideo, Message)
 from aiogram.exceptions import TelegramBadRequest
 
-from data import MENU_COMMANDS
 from data.lexicon import PIC
 from keyboards import ikb
 
 router = Router()
-v1 = 'BAACAgIAAxkBAAIBUGYaLHn_TjRCjob2Lsyvu3DyMZF4AALDRgACuwXQSGNYvUfL6D__NAQ'
-v2 = 'BAACAgIAAxkBAAIBUWYaLOIvQqXKFvKA1LpZ9GWlphEMAALHRgACuwXQSLIuY5L5KGwyNAQ'
-v3 = 'BAACAgIAAxkBAAIBXGYaMEvB9xbtGw64I-jEVsuCxbCGAAIGRwACuwXQSHVgpJfWuqpzNAQ'
-d1 = 'BQACAgIAAxkBAAIcJGVH_Ssy6A_K6oNYR666E0W0QyvbAAJROQAC_4hBSpn-RRcwW_BzMwQ'
-d2 = 'BQACAgIAAxkBAAIcJWVH_TaerIy6bi9SrbBOdqVkvD8WAAJSOQAC_4hBSl67emTu27U3MwQ'
-a1 = 'CQACAgIAAxkBAAIcYWVIC6jzvuKFEwVlcZZF_jnk-7D5AALqOQAC_4hBSgeX32oF4oc0MwQ'
-a2 = 'CQACAgIAAxkBAAIcJ2VH_bbpE8cAARDMDQvlIJJHqa4cBAACVjkAAv-IQUq03ry-9QABA04zBA'
+VID: list[str] = ['BAACAgIAAxkBAAIf8mYbpZI44yaBCASwhbX98NyfqlwCAAK5QAACIXHhSMDsJR4IaubjNAQ',
+                  'BAACAgIAAxkBAAIf82YbpcTpaI1ZtWeME-siAxy944GvAAK9QAACIXHhSP8tCvOlq848NAQ',
+                  'BAACAgIAAxkBAAIf9GYbppGPFxpYIZ3evpEWchSA607MAALGQAACIXHhSBBiTAZE_wJpNAQ']
+
+
 ph1 = PIC['mileston_blue']
 ph2 = PIC['mileston_green']
-g1 = 'CgACAgIAAxkBAAIcRGVIB3yfF8fmuX0R56VVHgkE3DqHAAI3NAACf8XRSbuAV4YGegc2MwQ'
-g2 = 'CgACAgIAAxkBAAIcRWVIB4MXhwj8KA8D4TOQlP3U_bNoAAJHMQACRWX5SpLiGvQ9pzK7MwQ'
-v = ['video1', 'video2', 'video3']
+
+PHOTO: list[str] = ['AgACAgIAAxkBAAIf52Ybo96HNRgi1TAJJUEyQEyWel7fAALp1zEbIXHhSOupgsCIBhUGAQADAgADeQADNAQ',
+                    'AgACAgIAAxkBAAIf6GYbo-g_260ffjT304KYCOGhz5qnAALq1zEbIXHhSFhz71h9YkFfAQADAgADeQADNAQ',
+                    'AgACAgIAAxkBAAIf6WYbo_PjBsuq9XEYXpiCjkAQHiYDAALr1zEbIXHhSLDFumPQD9OaAQADAgADeQADNAQ',
+                    'AgACAgIAAxkBAAIf6mYbo_-q0SxlENV2kAnMycu5rDRjAALs1zEbIXHhSOCijICEXfb0AQADAgADeQADNAQ'
+                    ]
+
+
+buts: list[str] = ['video1', 'video2', 'video3']
+
 
 # Этот хэндлер будет срабатывать на команду "/start"
 @router.message(F.text == '/video')
 async def process_sl(message: Message):
-    markup = ikb(3, *v, last_btn='cancel', **MENU_COMMANDS)
-    await message.answer_video(video=v3,
-                               caption='Эскиз',
+    markup = ikb(3, *buts)
+    await message.answer_video(video='BAACAgIAAxkBAAIgGmYbs8i_ogUDq7t1Ybnthhf3H-flAAKiQQACIXHhSPUs2U6K-cWdNAQ',
+                               caption='Augsburg',
                                reply_markup=markup)
+    await message.delete()
 
 
 # Этот хэндлер будет срабатывать на нажатие инлайн-кнопки
-@router.callback_query(F.data.in_(['video']))
+@router.callback_query(F.data.in_(['video1', 'video2', 'video3']))
 async def process_button_press(callback: CallbackQuery, bot: Bot):
-    markup = ikb(2, 'video')
+    markup = ikb(3, *buts, 'стереть сообщение')
     try:
+        n = int(callback.data[-1])
         await bot.edit_message_media(
             chat_id=callback.message.chat.id,
             message_id=callback.message.message_id,
             media=InputMediaVideo(
-                media=v2,
-                caption='Это video 2'),
+                media=VID[n - 1],
+                caption=f'Это video {n}'),
             reply_markup=markup)
     except TelegramBadRequest:
-        await bot.edit_message_media(
-            chat_id=callback.message.chat.id,
-            message_id=callback.message.message_id,
-            media=InputMediaVideo(
-                media=v1,
-                caption='Это video 1'),
-            reply_markup=markup)
+        print('except TelegramBadRequest')
+        # ######## await callback.message.delete()
+        # await bot.edit_message_media(
+        #     chat_id=callback.message.chat.id,
+        #     message_id=callback.message.message_id,
+        #     media=InputMediaVideo(
+        #         media=VID[0],
+        #         caption='Это video 1'),
+        #     reply_markup=markup)
+
+
+@router.callback_query(F.data.in_(['стереть сообщение']))
+async def cancel_button_press(callback: CallbackQuery):
+    await callback.message.delete()
+
+
+count_photo = 0
 
 
 @router.message(F.text == '/photo')
 async def process_sl(message: Message):
-    markup = ikb(2, 'photo')
-    await message.answer_photo(photo=ph1,
-                               caption='Это photo 1',
+    global count_photo
+    print(count_photo)
+    markup = ikb(2, 'next')
+    await message.answer_photo(photo=PHOTO[count_photo],
+                               caption=f'Это photo {count_photo + 1}',
                                reply_markup=markup)
+    count_photo += 1
+    await message.delete()
 
 
 # Этот хэндлер будет срабатывать на нажатие инлайн-кнопки
-@router.callback_query(F.data.in_(['photo']))
+@router.callback_query(F.data.in_(['next']))
 async def process_button_press(callback: CallbackQuery, bot: Bot):
-    markup = ikb(2, 'photo')
-    try:
-        await bot.edit_message_media(
-            chat_id=callback.message.chat.id,
-            message_id=callback.message.message_id,
-            media=InputMediaPhoto(
-                media=ph2,
-                caption='Это photo 2'),
-            reply_markup=markup)
-    except TelegramBadRequest:
-        await bot.edit_message_media(
-            chat_id=callback.message.chat.id,
-            message_id=callback.message.message_id,
-            media=InputMediaPhoto(
-                media=ph1,
-                caption='Это photo 1'),
-            reply_markup=markup)
+    global count_photo
+    print(count_photo)
+    if count_photo < len(PHOTO):
+        markup = ikb(2, 'next')
+        try:
+            await bot.edit_message_media(
+                chat_id=callback.message.chat.id,
+                message_id=callback.message.message_id,
+                media=InputMediaPhoto(
+                    media=PHOTO[count_photo],
+                    caption=f'Это photo {count_photo + 1}'),
+                reply_markup=markup)
+            count_photo += 1
+        except TelegramBadRequest:
+            await callback.message.delete()
+            # await bot.edit_message_media(
+            #     chat_id=callback.message.chat.id,
+            #     message_id=callback.message.message_id,
+            #     media=InputMediaPhoto(
+            #         media=PHOTO[0],
+            #         caption='Это photo 1'),
+            #     reply_markup=markup)
+    else:
+        count_photo = 0
+        await callback.message.delete()
 
 
 @router.message(F.text == '/audio')
