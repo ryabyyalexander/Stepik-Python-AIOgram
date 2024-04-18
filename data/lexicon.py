@@ -20,8 +20,7 @@ BOOK: dict[str, str] = {
 }
 
 MENU_COMMANDS: dict[str, str] = {
-    '/photo': 'слайд фото',
-    '/video': 'слайд видео'
+    '/fsm': 'машина состояний'
 }
 
 BUTTONS: dict[str, str] = {
