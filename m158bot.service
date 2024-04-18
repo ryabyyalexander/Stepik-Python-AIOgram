@@ -1,0 +1,14 @@
+[Unit]
+Description=m158bot
+After=syslog.target
+After=network.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/root/m158bot
+ExecStart=/root/m158bot/venv/bin/python3 /root/m158bot/main.py
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
