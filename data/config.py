@@ -25,3 +25,4 @@ def get_admin():
 
 
 admin = get_admin()
+admins = [admin]
